@@ -4,7 +4,9 @@ import java.io.File;
 import java.util.ArrayList;
 
 
-public class FileUtils {
+public final class FileUtils {
+
+	private FileUtils() {}
 
 	public static String[] getAllDirs(String path) {
 		ArrayList<String> dirs = new ArrayList<String>();
