@@ -9,7 +9,7 @@ public final class FileUtils {
 	private FileUtils() {}
 
 	public static String[] getAllDirs(String path) {
-		ArrayList<String> dirs = new ArrayList<String>();
+		ArrayList<String> dirs = new ArrayList<>();
 		getAllDirs(path, dirs);
 		
 		String[] ar = new String[dirs.size()];
@@ -32,7 +32,7 @@ public final class FileUtils {
 	}
 
 	public static String[] getAllJavaFiles(String path) {
-		ArrayList<String> files = new ArrayList<String>();
+		ArrayList<String> files = new ArrayList<>();
 		getAllJavaFiles(path, files);
 		
 		String[] ar = new String[files.size()];
