@@ -28,7 +28,7 @@ import com.github.mauricioaniche.ck.CKReport;
 
 public class CBO extends ASTVisitor implements Metric {
 
-	private Set<String> coupling = new HashSet<String>();
+	private Set<String> coupling = new HashSet<>();
 
 	@Override
 	public boolean visit(VariableDeclarationStatement node) {
@@ -54,6 +54,7 @@ public class CBO extends ASTVisitor implements Metric {
 		return super.visit(node);
 	}
 
+	@Override
 	public boolean visit(ReturnStatement node) {
 		if (node.getExpression() != null) {
 			coupleTo(node.getExpression().resolveTypeBinding());
@@ -68,11 +69,13 @@ public class CBO extends ASTVisitor implements Metric {
 		return super.visit(node);
 	}
 	
+	@Override
 	public boolean visit(ThrowStatement node) {
 		coupleTo(node.getExpression().resolveTypeBinding());
 		return super.visit(node);
 	}
 
+	@Override
 	public boolean visit(TypeDeclaration node) {
 		ITypeBinding type = node.resolveBinding();
 
@@ -87,6 +90,7 @@ public class CBO extends ASTVisitor implements Metric {
 		return super.visit(node);
 	}
 
+	@Override
 	public boolean visit(MethodDeclaration node) {
 
 		IMethodBinding method = node.resolveBinding();
@@ -118,21 +122,25 @@ public class CBO extends ASTVisitor implements Metric {
 		return super.visit(node);
 	}
 
+	@Override
 	public boolean visit(NormalAnnotation node) {
 		coupleTo(node.resolveTypeBinding());
 		return super.visit(node);
 	}
 
+	@Override
 	public boolean visit(MarkerAnnotation node) {
 		coupleTo(node.resolveTypeBinding());
 		return super.visit(node);
 	}
 
+	@Override
 	public boolean visit(SingleMemberAnnotation node) {
 		coupleTo(node.resolveTypeBinding());
 		return super.visit(node);
 	}
 
+	@Override
 	public boolean visit(ParameterizedType node) {
 		ITypeBinding binding = node.resolveBinding();
 		if (binding == null)
