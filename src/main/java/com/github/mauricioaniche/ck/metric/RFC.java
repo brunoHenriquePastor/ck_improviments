@@ -15,8 +15,9 @@ import com.github.mauricioaniche.ck.CKReport;
 
 public class RFC extends ASTVisitor implements Metric {
 
-	private HashSet<String> methodInvocations = new HashSet<String>();
+	private HashSet<String> methodInvocations = new HashSet<>();
 
+	@Override
 	public boolean visit(MethodInvocation node) {
 		IMethodBinding binding = node.resolveMethodBinding();
 		count(node.getName()  + "/" + arguments(node.arguments()), binding);
@@ -38,6 +39,7 @@ public class RFC extends ASTVisitor implements Metric {
 		}
 	}
 	
+	@Override
 	public boolean visit(SuperMethodInvocation node) {
 		IMethodBinding binding = node.resolveMethodBinding();
 		count(node.getName()  + "/" + arguments(node.arguments()), binding);
@@ -47,13 +49,13 @@ public class RFC extends ASTVisitor implements Metric {
 
 	private String getMethodName(IMethodBinding binding) {
 		
-		String argumentList = "";
+		StringBuilder argumentList = new StringBuilder();
 		ITypeBinding[] args = binding.getParameterTypes();
 		for(ITypeBinding arg : args) {
-			argumentList += arg.getName();
+			argumentList.append(arg.getName());
 		}
-		String method = binding.getDeclaringClass().getQualifiedName() + "." + binding.getName() + "/" + binding.getTypeArguments().length + "[" + argumentList + "]";
-		return method;
+		
+		return binding.getDeclaringClass().getQualifiedName() + "." + binding.getName() + "/" + binding.getTypeArguments().length + "[" + argumentList + "]";
 	}
 	
 	@Override
