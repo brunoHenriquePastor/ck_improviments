@@ -2,21 +2,21 @@ package com.github.mauricioaniche.ck;
 
 import java.io.FileNotFoundException;
 import java.io.PrintStream;
-import java.util.Collection;
 import java.util.Iterator;
-import java.util.function.Consumer;
+
+import org.apache.log4j.Logger;
 
 public class Runner {
 
+	private static Logger log = Logger.getLogger(Runner.class);
+
 	public static void main(String[] args) throws FileNotFoundException {
 		if(args==null || args.length < 2) {
-			System.out.println("Usage java -jar ck.jar <path to project> <path to csv>");
+			log.error("Usage java -jar ck.jar <path to project> <path to csv>");
 			System.exit(1);
 		}
 		
-		String projectName = args[0];
 		String path = args[1];
-		String commitAsJSon = args[2];
 		
 		CKReport report = new CK().calculate(path);
 		
