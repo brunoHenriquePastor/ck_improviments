@@ -11,6 +11,7 @@ import org.eclipse.jdt.core.JavaCore;
 import org.eclipse.jdt.core.dom.AST;
 import org.eclipse.jdt.core.dom.ASTParser;
 
+import com.github.mauricioaniche.ck.exception.UserMetricsException;
 import com.github.mauricioaniche.ck.metric.CBO;
 import com.github.mauricioaniche.ck.metric.DIT;
 import com.github.mauricioaniche.ck.metric.LCOM;
@@ -46,7 +47,7 @@ public class CK {
 		}
 	}
 
-	public List<Callable<Metric>> pluggedMetrics; 
+	private List<Callable<Metric>> pluggedMetrics; 
 	private static Logger log = Logger.getLogger(CK.class);
 
 	public CK() {
@@ -63,7 +64,7 @@ public class CK {
 		String[] javaFiles = FileUtils.getAllJavaFiles(path);
 		log.info("Found " + javaFiles.length + " java files");
 		
-		MetricsExecutor storage = new MetricsExecutor(() -> metrics());
+		MetricsExecutor storage = new MetricsExecutor(this::metrics);
 		
 		List<List<String>> partitions = Lists.partition(Arrays.asList(javaFiles), MAX_AT_ONCE);
 		log.info("Max partition size: " + MAX_AT_ONCE + ", total partitions=" + partitions.size());
@@ -101,7 +102,7 @@ public class CK {
 
 	private List<Metric> userMetrics() {
 		try {
-			List<Metric> userMetrics = new ArrayList<Metric>();
+			List<Metric> userMetrics = new ArrayList<>();
 			
 			for(Callable<Metric> metricToBeCreated : pluggedMetrics) {
 				userMetrics.add(metricToBeCreated.call());
@@ -109,7 +110,7 @@ public class CK {
 
 			return userMetrics;
 		} catch (Exception e) {
-			throw new RuntimeException(e);
+			throw new UserMetricsException();
 		}
 	}
 	
