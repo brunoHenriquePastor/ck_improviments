@@ -89,3 +89,7 @@ Then, you can:
 # License
 
 This software is licensed under the Apache 2.0 License.
+
+# Improviments documentation
+
+link: https://docs.google.com/document/d/1Ky5En4GBChbPUJn0yFoChNThuiwtBCWLgsDx_MCMsp0/edit#heading=h.uhgzlclhh37e
