@@ -34,7 +34,7 @@ public class CKNumber {
 		this.className = className;
 		this.type = type;
 		
-		this.specific = new HashMap<String, Integer>();
+		this.specific = new HashMap<>();
 	}
 	
 	public String getFile() {
