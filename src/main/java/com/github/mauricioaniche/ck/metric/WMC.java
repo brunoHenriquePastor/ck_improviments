@@ -86,17 +86,13 @@ public class WMC extends ASTVisitor implements Metric {
 		int ands = StringUtils.countMatches(expr, "&");
 		int ors = StringUtils.countMatches(expr, "|");
 		
-		increaseCc(ands + ors);
+		increaseCc();
     	increaseCc();
     	
     	return super.visit(node);
     }
     
     private void increaseCc() {
-    	increaseCc(1);
-    }
-
-    protected void increaseCc() {
     	cc++;
     }
 
