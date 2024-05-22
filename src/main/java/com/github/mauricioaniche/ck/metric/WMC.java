@@ -21,6 +21,7 @@ public class WMC extends ASTVisitor implements Metric {
 
 	protected int cc = 0;
 	
+	@Override
     public boolean visit(MethodDeclaration node) {
     	
     	increaseCc();
@@ -78,6 +79,7 @@ public class WMC extends ASTVisitor implements Metric {
     	return super.visit(node);
     }
     
+	@Override
     public boolean visit(IfStatement node) {
     	
 		String expr = node.getExpression().toString().replace("&&", "&").replace("||", "|");
@@ -94,7 +96,7 @@ public class WMC extends ASTVisitor implements Metric {
     	increaseCc(1);
     }
 
-    protected void increaseCc(int qtd) {
+    protected void increaseCc() {
     	cc++;
     }
 
