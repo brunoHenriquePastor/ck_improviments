@@ -9,7 +9,7 @@ public class CKReport {
 	private Map<String, CKNumber> results;
 
 	public CKReport() {
-		this.results = new HashMap<String, CKNumber>();
+		this.results = new HashMap<>();
 	}
 
 	public void add(CKNumber ck) {
