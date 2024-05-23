@@ -32,5 +32,6 @@ public class NOC extends ASTVisitor implements Metric {
 
 	@Override
 	public void setResult(CKNumber result) {
+		// The NOC metric are calculated in the visit method, don't need to return here
 	}
 }
