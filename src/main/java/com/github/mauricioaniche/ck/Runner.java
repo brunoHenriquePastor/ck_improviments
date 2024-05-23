@@ -1,6 +1,5 @@
 package com.github.mauricioaniche.ck;
 
-import java.io.FileNotFoundException;
 import java.io.PrintStream;
 import java.util.Iterator;
 
@@ -10,7 +9,7 @@ public class Runner {
 
 	private static Logger log = Logger.getLogger(Runner.class);
 
-	public static void main(String[] args) throws FileNotFoundException {
+	public static void main(String[] args) {
 		if(args==null || args.length < 2) {
 			log.error("Usage java -jar ck.jar <path to project> <path to csv>");
 			System.exit(1);
