@@ -1,6 +1,5 @@
 package com.github.mauricioaniche.ck.metric;
 
-import org.apache.commons.lang3.StringUtils;
 import org.eclipse.jdt.core.dom.ASTVisitor;
 import org.eclipse.jdt.core.dom.CatchClause;
 import org.eclipse.jdt.core.dom.CompilationUnit;
@@ -81,19 +80,16 @@ public class WMC extends ASTVisitor implements Metric {
     
 	@Override
     public boolean visit(IfStatement node) {
-    	
-		String expr = node.getExpression().toString().replace("&&", "&").replace("||", "|");
-		int ands = StringUtils.countMatches(expr, "&");
-		int ors = StringUtils.countMatches(expr, "|");
-		
-		increaseCc();
-    	increaseCc();
-    	
+		increaseCc(2);
     	return super.visit(node);
     }
     
     private void increaseCc() {
     	cc++;
+    }
+
+	private void increaseCc(int qtd) {
+    	cc += qtd;
     }
 
 	@Override
